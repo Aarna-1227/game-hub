@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showHub, setShowHub] = useState(false);
+
+  const games = [
+    { name: "Fruit Catch", img: "/assets/fruit.png" },
+    { name: "Pixel Runner", img: "/assets/runner.png" },
+    { name: "Space Shooter", img: "/assets/space.png" },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      {!showHub ? (
+        <div className="landing">
+          <h1 className="glitch" data-text="MASTER GAMER">
+            MASTER GAMER
+          </h1>
+          <button onClick={() => setShowHub(true)}>Enter Arcade</button>
+        </div>
+      ) : (
+        <>
+          <header className="header">
+            <h1>🎮 Master Gamer</h1>
+            <p>Your Dark Mode Gaming Hub</p>
+          </header>
+
+          <main className="games-grid">
+            {games.map((game, index) => (
+              <div className="game-card" key={index}>
+                <img src={game.img} alt={game.name} />
+                <h3>{game.name}</h3>
+                <button>Play</button>
+              </div>
+            ))}
+          </main>
+        </>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
